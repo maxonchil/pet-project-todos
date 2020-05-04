@@ -52,9 +52,7 @@
       <mat-hint
         id="mat-hint"
         class="dialog__error"
-        *ngIf="
-          checkForError('time', 'required') || checkForError('time', 'hour')
-        "
+        *ngIf="checkForError('time', 'required')"
         >Current time required minimum</mat-hint
       >
     </mat-form-field>

@@ -25,7 +25,7 @@ export class AddTodoDialogComponent implements OnInit {
     this.todoForm = this.fb.group({
       title: ['', [Validators.minLength(2), Validators.maxLength(100), Validators.required]],
       date: [this.minDate, [this.dateValidator, Validators.required]],
-      time: ['', [this.timeValidator, Validators.required]],
+      time: ['', [Validators.required]],
       priority: ['', Validators.required],
     });
   }
@@ -51,31 +51,17 @@ export class AddTodoDialogComponent implements OnInit {
 
 
   private dateValidator(control: FormControl): Validate {
-    console.log(control)
     const date = (control.value as Date);
     if (!date) {
       return { days: true };
     }
     const validate = date.toLocaleDateString()
       .match(/\d{1,2}\/\d{1,2}\/\d{4}/);
+
     if (!validate) {
       return { days: true };
     }
     return null;
   }
 
-  private timeValidator(control: FormControl): Validate {
-    const inputHour = Number(control.value.split(':')[0]);
-    const inputMinutes = Number(control.value.split(':')[1]);
-    const curentHour = new Date().getHours();
-    const curentMinutes = new Date().getMinutes();
-    if (inputHour < curentHour) {
-      return { hour: true };
-
-    } else if (inputHour === curentHour) {
-      return inputMinutes < curentMinutes ? { hour: false } : null;
-    }
-    return null;
-
-  }
 }
