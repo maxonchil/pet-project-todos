@@ -8,6 +8,7 @@
     {{ todo.title }}
   </div>
   <textarea
+    maxlength="100"
     class="todo__text-area"
     matInput
     *ngIf="editTodoID === todo._id"

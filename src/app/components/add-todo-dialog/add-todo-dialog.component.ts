@@ -23,7 +23,7 @@ export class AddTodoDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoForm = this.fb.group({
-      title: ['', [Validators.minLength(2), Validators.required]],
+      title: ['', [Validators.minLength(2), Validators.maxLength(100), Validators.required]],
       date: [this.minDate, [this.dateValidator, Validators.required]],
       time: ['', [this.timeValidator, Validators.required]],
       priority: ['', Validators.required],
@@ -51,12 +51,13 @@ export class AddTodoDialogComponent implements OnInit {
 
 
   private dateValidator(control: FormControl): Validate {
+    console.log(control)
     const date = (control.value as Date);
     if (!date) {
       return { days: true };
     }
     const validate = date.toLocaleDateString()
-      .match(/\d{1,2}\.\d{1,2}\.\d{4}/);
+      .match(/\d{1,2}\/\d{1,2}\/\d{4}/);
     if (!validate) {
       return { days: true };
     }
