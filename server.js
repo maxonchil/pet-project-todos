@@ -10,8 +10,6 @@
 // const { level } = config.get("logger");
 // const path = require("path");
 
-// const { port: serverPort } = config.get("webServer");
-
 // logger.level = level;
 
 // // const dbConnect = dbConnection();
@@ -38,4 +36,4 @@ app.use(express.static(__dirname + "/dist/todos"));
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/todos/index.html"));
 });
-app.listen(process.env.PORT || 8000);
+app.listen(process.env.PORT || serverPort, () => console.log("Server started"));
