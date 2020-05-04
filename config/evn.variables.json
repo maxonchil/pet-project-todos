@@ -6,10 +6,7 @@
     "logsPath": "LOGS_PATH"
   },
   "dataBase": {
-    "name": "DB_NAME",
-    "username": "DB_USERNAME",
-    "password": "DB_PASSWORD",
-    "cluster": "DB_CLUSTER"
+    "url": "DB_URL"
   },
   "logger": {
     "level": "LOGER_LVL"
