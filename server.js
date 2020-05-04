@@ -14,10 +14,10 @@ const { port: serverPort } = config.get("webServer");
 
 logger.level = level;
 
-const dbConnect = dbConnection();
-if (!dbConnect) {
-  return logger.error(ERROR_LOG.DB_CONNECTION);
-}
+// const dbConnect = dbConnection();
+// if (!dbConnect) {
+//   return logger.error(ERROR_LOG.DB_CONNECTION);
+// }
 
 app.use(express.static(__dirname, "/src"));
 app.use(express.json());
