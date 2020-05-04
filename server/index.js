@@ -10,7 +10,7 @@ const { ERROR_LOG } = require('./data/logs.json');
 const { level } = config.get('logger');
 const path = require('path');
 
-app.use(express.static(__dirname + '/dist/FE'));
+app.use(express.static(__dirname + '/FE'));
 
 const { port: serverPort } = config.get('webServer');
 
