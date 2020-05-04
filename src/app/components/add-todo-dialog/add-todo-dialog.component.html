@@ -40,24 +40,29 @@
         *ngIf="checkForError('date', 'required')"
         >Today's minimum date required</mat-hint
       >
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('date', 'days')"
+        >Date can not be less than current</mat-hint
+      >
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
       <mat-label>Time</mat-label>
-      <input
-        type="text"
-        required
-        formControlName="time"
-        matInput
-        type="time"
-        min="09:00"
-      />
+      <input type="text" required formControlName="time" matInput type="time" />
       <mat-hint
         id="mat-hint"
         class="dialog__error"
         *ngIf="checkForError('time', 'required')"
         >This field is required</mat-hint
+      >
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('time', 'hour')"
+        >Time can not be less than current</mat-hint
       >
     </mat-form-field>
     <mat-form-field class="dialog__form-field">

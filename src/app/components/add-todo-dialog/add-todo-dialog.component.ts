@@ -1,5 +1,6 @@
+import { Validate } from './../../interfaces/validate';
 import { TodoPriorities } from 'src/app/enums/todo-priorities.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataStoreService } from 'src/app/services/data-store.service';
 
@@ -24,7 +25,7 @@ export class AddTodoDialogComponent implements OnInit {
     this.todoForm = this.fb.group({
       title: ['', [Validators.minLength(2), Validators.required]],
       date: [this.minDate, [this.dateValidator, Validators.required]],
-      time: ['', [Validators.required]],
+      time: ['', [this.timeValidator, Validators.required]],
       priority: ['', Validators.required],
     });
   }
@@ -49,16 +50,31 @@ export class AddTodoDialogComponent implements OnInit {
   }
 
 
-  private dateValidator(control: FormControl): boolean {
+  private dateValidator(control: FormControl): Validate {
     const date = (control.value as Date);
     if (!date) {
-      return false;
+      return { days: true };
     }
     const validate = date.toLocaleDateString()
       .match(/\d{1,2}\.\d{1,2}\.\d{4}/);
     if (!validate) {
-      return false;
+      return { days: true };
     }
-    return true;
+    return null;
+  }
+
+  private timeValidator(control: FormControl): Validate {
+    const inputHour = Number(control.value.split(':')[0]);
+    const inputMinutes = Number(control.value.split(':')[1]);
+    const curentHour = new Date().getHours();
+    const curentMinutes = new Date().getMinutes();
+    if (inputHour < curentHour) {
+      return { hour: true };
+
+    } else if (inputHour === curentHour) {
+      return inputMinutes < curentMinutes ? { hour: false } : null;
+    }
+    return null;
+
   }
 }
