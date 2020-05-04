@@ -8,7 +8,6 @@ const getTodosHandler = (req, res) => {
 
   Todo.find({})
     .then((todos) => {
-      console.log("im here");
       res.json(success(SUCCESS_LOG.SENDED, { todos }));
     })
     .catch((error) => errorHandler(error.message, res));
