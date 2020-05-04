@@ -8,6 +8,9 @@ const logger = log4js.getLogger();
 const dbConnection = require('./api/utilits/dbConnection');
 const { ERROR_LOG } = require('./data/logs.json');
 const { level } = config.get('logger');
+const path = require('path');
+
+app.use(express.static(__dirname + '/dist/FE'));
 
 const { port: serverPort } = config.get('webServer');
 
