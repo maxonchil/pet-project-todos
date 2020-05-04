@@ -11,7 +11,9 @@ const { level } = config.get('logger');
 const path = require('path');
 
 app.use(express.static(__dirname + '/FE'));
-
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/FE/src/index.html'));
+});
 const { port: serverPort } = config.get('webServer');
 
 logger.level = level;
