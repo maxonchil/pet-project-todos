@@ -1,0 +1,51 @@
+<div class="todo__inner">
+  <mat-icon class="todo__edit button" (click)="editTodo(todo)">edit</mat-icon>
+
+  <div
+    *ngIf="editTodoID !== todo._id"
+    [ngClass]="{ todo__title: true, 'todo__title--is-done': todo.completed }"
+  >
+    {{ todo.title }}
+  </div>
+  <textarea
+    class="todo__text-area"
+    matInput
+    *ngIf="editTodoID === todo._id"
+    [(ngModel)]="todo.title"
+  ></textarea>
+  <div class="todo__deadline">
+    {{ todo.date | date: "mediumDate" }} {{ todo.time | timeFormat12h }}
+  </div>
+  <div class="todo__priority">
+    {{ todo.priority }}
+  </div>
+  <div class="todo__footer">
+    <mat-checkbox
+      (click)="completeTodo(todo)"
+      class="todo__complete"
+      [(ngModel)]="todo.completed"
+      labelPosition="after"
+      ><span class="todo__status">{{
+        (todo.completed && "Done") || "In progress"
+      }}</span></mat-checkbox
+    >
+    <button
+      mat-icon-button
+      (click)="deleteTodo(todo)"
+      class="todo__delete button"
+      type="button"
+      title="Delete"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      title="Save"
+      class="todo__save button"
+      (click)="updateTodo(todo)"
+      [disabled]="updatedTodo !== todo._id || todo.title.length < 2"
+    >
+      <mat-icon class="todo__save">save</mat-icon>
+    </button>
+  </div>
+</div>

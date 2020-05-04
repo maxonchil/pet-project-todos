@@ -1,0 +1,49 @@
+@import "../../../styles.scss";
+.todo {
+  &__id {
+    text-align: center;
+    border-bottom: 1px solid $main-white;
+  }
+  &__span {
+    font-weight: 700;
+  }
+  &__title {
+    margin: 10px;
+    &--is-done {
+      text-decoration: line-through;
+    }
+  }
+  &__footer {
+    border-top: 1px solid $main-black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+  }
+  &__complete {
+    width: 105px;
+    font-size: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  &__delete {
+    @include button();
+  }
+  &__edit {
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    font-size: 15px;
+    float: right;
+  }
+  &__text-area {
+    resize: none;
+  }
+  &__deadline {
+    font-size: 10px;
+    color: $deadline-color;
+  }
+  &__save {
+    cursor: pointer;
+  }
+}

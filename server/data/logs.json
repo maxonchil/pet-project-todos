@@ -1,0 +1,15 @@
+{
+  "SUCCESS_LOG": {
+    "DEFATUL": "Success request",
+    "UPDATED": "Updated!",
+    "ADDED": "Added!",
+    "SAVED": "Saved!",
+    "DELETED": "Deleted!",
+    "SENDED": "Sended!",
+    "DB_CONNECTION": "DB connected!"
+  },
+  "ERROR_LOG": {
+    "VALIDATION": "Validation failed!",
+    "DB_CONNECTION": "DB connection is failed"
+  }
+}

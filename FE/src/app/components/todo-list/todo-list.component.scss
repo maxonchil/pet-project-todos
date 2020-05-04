@@ -1,0 +1,40 @@
+@import "../../../styles.scss";
+.todo {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  &__controllers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__inputs {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+  }
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: minmax(1fr, auto);
+    justify-items: center;
+    grid-gap: 10px;
+  }
+  &__item {
+    align-self: center;
+    width: 80%;
+    border: 2px solid $todo-borderColor;
+    border-radius: 10px;
+    padding: 5px 5px 0 5px;
+    background-color: $todo-backgroundColor;
+    word-wrap: break-word;
+  }
+
+  &__add {
+    font-size: 30px;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,93 @@
+<div class="dialog">
+  <h2 class="dialog__title">Add new todo</h2>
+  <mat-dialog-content [formGroup]="todoForm" class="dialog__form">
+    <mat-form-field class="dialog__form-field">
+      <mat-label>Todo title</mat-label>
+      <input
+        type="text"
+        required
+        min="3"
+        formControlName="title"
+        matNativeControl
+        placeholder="e.g: Meeting with Maria"
+      />
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('title', 'required')"
+        >This field is required</mat-hint
+      >
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('title', 'minlength')"
+        >Min 2 characters requierd</mat-hint
+      >
+    </mat-form-field>
+    <mat-form-field class="dialog__form-field">
+      <mat-label>Date</mat-label>
+      <input
+        required
+        formControlName="date"
+        matInput
+        [matDatepicker]="date"
+        [min]="minDate"
+        max="10"
+      />
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('date', 'required')"
+        >Today's minimum date required</mat-hint
+      >
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="dialog__form-field">
+      <mat-label>Time</mat-label>
+      <input
+        type="text"
+        required
+        formControlName="time"
+        matInput
+        type="time"
+        min="09:00"
+      />
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('time', 'required')"
+        >This field is required</mat-hint
+      >
+    </mat-form-field>
+    <mat-form-field class="dialog__form-field">
+      <mat-label>Priority</mat-label>
+      <mat-select required formControlName="priority">
+        <mat-option [value]="priorities[0]">Light</mat-option>
+        <mat-option [value]="priorities[1]">Medium</mat-option>
+        <mat-option [value]="priorities[2]">Important</mat-option>
+        <mat-option [value]="priorities[3]">Omae wa no shinderiu</mat-option>
+      </mat-select>
+      <mat-hint
+        id="mat-hint"
+        class="dialog__error"
+        *ngIf="checkForError('priority', 'required')"
+        >This field is required</mat-hint
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog__footer">
+    <button mat-stroked-button class="dialog__close button" [mat-dialog-close]>
+      close
+    </button>
+    <button
+      [mat-dialog-close]
+      [disabled]="todoForm.invalid"
+      mat-stroked-button
+      class="dialog__submit button"
+      (click)="createNewTodo()"
+    >
+      submit
+    </button>
+  </mat-dialog-actions>
+</div>

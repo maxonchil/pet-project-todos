@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+$status-fs: 12px;
+$todo-borderColor: #e4aa2f;
+$todo-backgroundColor: #f0c465;
+$main-white: #fff;
+$main-black: #000;
+$error-color: rgb(236, 5, 5);
+$deadline-color: rgb(128, 128, 128);
+
+@mixin button {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+#mat-hint {
+  color: $error-color;
+}

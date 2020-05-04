@@ -1,0 +1,9 @@
+{
+  "SUCCESS_STATUS": {
+    "DEFAULT": "200 OK"
+  },
+
+  "ERROR_STATUS": {
+    "DEFAULT": "400"
+  }
+}

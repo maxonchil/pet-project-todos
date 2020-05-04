@@ -1,0 +1,48 @@
+<div class="todo">
+  <div class="todo__controllers">
+    <div class="todo__inputs">
+      <mat-form-field class="todo__form-field">
+        <mat-label>Search by word</mat-label>
+        <input
+          #searchInput
+          class="todo__search-field"
+          matInput
+          placeholder="e.g: Meeting, Natalia"
+        />
+      </mat-form-field>
+      <div class="todo__filter">
+        <mat-form-field>
+          <mat-label>Filter note</mat-label>
+          <mat-select
+            (selectionChange)="dataProcessing.todoFilter($event.value)"
+          >
+            <mat-option value="deadline_comming">Deadline coomming</mat-option>
+            <mat-option value="deadline_latest">Deadline latest</mat-option>
+            <mat-option value="priority_high">Priority high to low</mat-option>
+            <mat-option value="priority_low">Priority low to high</mat-option>
+            <mat-option value="done">Done</mat-option>
+            <mat-option value="in_progress">In progress</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          [disabled]="!dataProcessing.wasFiltred"
+          (click)="dataProcessing.clearFilter()"
+          mat-icon-button
+        >
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+    <button (click)="addTodo()" class="todo__add" mat-mini-fab title="Add todo">
+      +
+    </button>
+  </div>
+  <ul class="todo__list">
+    <li
+      *ngFor="let todo of dataStore.todos$ | async; let i = index"
+      class="todo__item"
+    >
+      <app-todo-item [todo]="todo"></app-todo-item>
+    </li>
+  </ul>
+</div>
