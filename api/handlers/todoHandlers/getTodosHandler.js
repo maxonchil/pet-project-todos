@@ -7,9 +7,7 @@ const getTodosHandler = (req, res) => {
   res.setHeader("Content-Type", "application/json");
 
   Todo.find({})
-    .then((todos) => {
-      res.json(success(SUCCESS_LOG.SENDED, { todos }));
-    })
+    .then((todos) => res.json(success(SUCCESS_LOG.SENDED, { todos })))
     .catch((error) => errorHandler(error.message, res));
 };
 module.exports = getTodosHandler;
