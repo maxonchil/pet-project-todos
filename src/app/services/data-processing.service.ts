@@ -1,7 +1,7 @@
 import { TodoPriorities } from 'src/app/enums/todo-priorities.enum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Todo } from '../interfaces/todo';
-import { debounceTime, takeUntil, map } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { DataStoreService } from './data-store.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
