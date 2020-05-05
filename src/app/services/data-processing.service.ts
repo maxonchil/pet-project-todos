@@ -1,39 +1,16 @@
 import { TodoPriorities } from 'src/app/enums/todo-priorities.enum';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Todo } from '../interfaces/todo';
-import { debounceTime, takeUntil } from 'rxjs/operators';
 import { DataStoreService } from './data-store.service';
-import { Injectable, OnDestroy } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataProcessingService implements OnDestroy {
-  private notifier = new Subject();
+export class DataProcessingService {
   public wasFiltred = false;
 
-  constructor(private dataStore: DataStoreService, private snackBar: MatSnackBar) {
+  constructor(private dataStore: DataStoreService) {
 
-  }
-
-  public searchByWord(element: HTMLInputElement): void {
-    fromEvent(element, 'input')
-      .pipe(debounceTime(500), takeUntil(this.notifier))
-      .subscribe((event: InputEvent) => {
-        const value = (event.target as HTMLInputElement).value;
-
-        if (!value) {
-          this.dataStore.todos$.next(this.dataStore.todosBackup);
-        }
-
-        const result = this.dataStore.todosBackup.filter((todo: Todo) => todo.title.includes(value));
-        this.dataStore.todos$.next(result);
-
-        if (!result.length) {
-          this.snackBar.open('Not found', 'Undo', { duration: 2000 });
-        }
-      });
   }
 
   public todoFilter(value: string): void {
@@ -104,9 +81,4 @@ export class DataProcessingService implements OnDestroy {
     return firstHour === secondHour ? secondMinutes - firstMinuts : secondHour - firstHour;
   }
 
-
-  ngOnDestroy(): void {
-    this.notifier.next();
-    this.notifier.complete();
-  }
 }

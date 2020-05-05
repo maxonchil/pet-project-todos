@@ -13,14 +13,14 @@
         matNativeControl
         placeholder="e.g: Meeting with Maria"
       />
-      <mat-hint
+      <mat-error
         id="mat-hint"
         class="dialog__error"
         *ngIf="
           checkForError('title', 'required') ||
           checkForError('title', 'minlength')
         "
-        >Min 2 characters requierd</mat-hint
+        >Min 2 characters requierd</mat-error
       >
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
@@ -33,7 +33,7 @@
         [min]="minDate"
         max="10"
       />
-      <mat-hint
+      <mat-error
         id="mat-hint"
         class="dialog__error"
         *ngIf="
@@ -41,7 +41,7 @@
           checkForError('date', 'date') ||
           checkForError('date', 'matDatepickerMin')
         "
-        >Today's minimum date required</mat-hint
+        >Today's minimum date required</mat-error
       >
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
@@ -49,11 +49,11 @@
     <mat-form-field class="dialog__form-field">
       <mat-label>Time</mat-label>
       <input type="text" required formControlName="time" matInput type="time" />
-      <mat-hint
+      <mat-error
         id="mat-hint"
         class="dialog__error"
         *ngIf="checkForError('time', 'required')"
-        >Current time required minimum</mat-hint
+        >Current time required minimum</mat-error
       >
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
@@ -64,11 +64,11 @@
         <mat-option [value]="priorities[2]">Important</mat-option>
         <mat-option [value]="priorities[3]">Omae wa no shinderiu</mat-option>
       </mat-select>
-      <mat-hint
+      <mat-error
         id="mat-hint"
         class="dialog__error"
         *ngIf="checkForError('priority', 'required')"
-        >This field is required</mat-hint
+        >This field is required</mat-error
       >
     </mat-form-field>
   </mat-dialog-content>
