@@ -5,7 +5,7 @@ import { DataStoreService } from './../../services/data-store.service';
 import { AddTodoDialogComponent } from './../add-todo-dialog/add-todo-dialog.component';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
 
 
 
@@ -19,14 +19,19 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public query: string;
   private notifier = new Subject();
+  public todos$: Observable<any[]>;
 
   constructor(
+    // do not use public services in component
     public dataStore: DataStoreService,
     private dialog: MatDialog,
-    public dataProcessing: DataProcessingService, private snackBar: MatSnackBar) {
+    public dataProcessing: DataProcessingService,
+    // unused service
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.todos$ = this.dataStore.getTodos();
   }
 
   ngAfterViewInit(): void {

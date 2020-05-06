@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoListComponent } from '../app/components/todo-list/todo-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { FormsModule } from '@angular/forms';
-import { NgModel } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -41,6 +40,7 @@ import { SearchPipe } from './pipes/search.pipe';
     FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
+    //create separate module for material
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

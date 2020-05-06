@@ -3,7 +3,8 @@
 
   <div
     *ngIf="editTodoID !== todo._id"
-    [ngClass]="{ todo__title: true, 'todo__title--is-done': todo.completed }"
+    class="todo__title"
+    [ngClass]="{ 'todo__title--is-done': todo.completed }"
   >
     {{ todo.title }}
   </div>
