@@ -6,10 +6,10 @@ const todosRouter = require("./api/routing/todos.router");
 const log4js = require("log4js");
 const logger = log4js.getLogger();
 const dbConnection = require("./api/utilits/dbConnection");
-const { ERROR_LOG } = require("./data/logs.json");
-const { level } = config.get("logger");
+const {ERROR_LOG} = require("./data/logs.json");
+const {level} = config.get("logger");
 const path = require("path");
-
+const {port: serverPort} = config.get('webServer');
 logger.level = level;
 
 const dbConnect = dbConnection();

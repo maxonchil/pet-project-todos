@@ -32,7 +32,9 @@
     background-color: $todo-backgroundColor;
     word-wrap: break-word;
   }
-
+&__clear-search{
+  vertical-align: middle;
+}
   &__add {
     font-size: 30px;
     font-weight: 300;

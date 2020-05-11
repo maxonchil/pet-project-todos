@@ -7,7 +7,6 @@
         required
         maxlength="100"
         type="text"
-        required
         min="3"
         formControlName="title"
         matNativeControl
@@ -17,18 +16,18 @@
         id="mat-hint"
         class="dialog__error"
         *ngIf="
-          checkForError('title', 'required') ||
-          checkForError('title', 'minlength')
+        this.todoForm.controls.title.errors?.required ||
+        this.todoForm.controls.title.errors?.minlength
         "
-        >Min 2 characters required</mat-error
-      >
+      >Min 2 characters required
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
       <mat-label>Date</mat-label>
       <input
         required
-        formControlName="date"
         matInput
+        formControlName="date"
         [matDatepicker]="date"
         [min]="minDate"
         max="10"
@@ -37,23 +36,25 @@
         id="mat-hint"
         class="dialog__error"
         *ngIf="
-          checkForError('date', 'required') ||
-          checkForError('date', 'date') ||
-          checkForError('date', 'matDatepickerMin')
+        this.todoForm.controls.date.errors?.required ||
+        this.todoForm.controls.date.errors?.date ||
+        this.todoForm.controls.date.errors?.matDatepickerMin
         "
-        >Today's minimum date required</mat-error
+      >Today's minimum date required
+      </mat-error
       >
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
       <mat-label>Time</mat-label>
-      <input type="text" required formControlName="time" matInput type="time" />
+      <input type="text" required formControlName="time" matInput type="time"/>
       <mat-error
         id="mat-hint"
         class="dialog__error"
-        *ngIf="checkForError('time', 'required')"
-        >Current time required minimum</mat-error
+        *ngIf="this.todoForm.controls.time.errors?.required"
+      >Current time required minimum
+      </mat-error
       >
     </mat-form-field>
     <mat-form-field class="dialog__form-field">
@@ -67,8 +68,9 @@
       <mat-error
         id="mat-hint"
         class="dialog__error"
-        *ngIf="checkForError('priority', 'required')"
-        >This field is required</mat-error
+        *ngIf="this.todoForm.controls.priority.errors?.required"
+      >This field is required
+      </mat-error
       >
     </mat-form-field>
   </mat-dialog-content>

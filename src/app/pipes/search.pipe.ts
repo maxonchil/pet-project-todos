@@ -16,13 +16,7 @@ export class SearchPipe implements PipeTransform {
     }
     const searchWord = query.toString().toLowerCase();
 
-    const result = todos.filter((todo: Todo) => this.checkForMatch(todo, searchWord));
-
-    if (!result.length) {
-      this.snackBar.open('Not found', 'Undo', { duration: 2000 });
-    }
-
-    return result;
+    return todos.filter((todo: Todo) => this.checkForMatch(todo, searchWord));
   }
 
   private checkForMatch = (todo: Todo, searchWord: string): boolean => {
