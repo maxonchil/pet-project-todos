@@ -21,6 +21,7 @@ app.use(express.static(__dirname + "/dist/todos"));
 app.use(express.json());
 app.use(cors());
 
+
 app.use("/api/todos", todosRouter);
 
 app.get("/", (req, res) => {
