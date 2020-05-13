@@ -1,14 +1,14 @@
 language: node_js
 node_js:
-  - "10"
+- '10'
 before_install:
-  - npm install -g @angular/cli
+- npm install -g @angular/cli
 install: npm install
 branches:
   only:
-    - master
+  - master
 deploy:
   provider: heroku
   app: aninotes
   api_key:
-    secure: "ATS/t/L6+Mfr7eEfoNyLQ/4THozz8CdrMZ3F6VSaVUHcQmBRwzLrcvoXkw0JG3/jRI8cXzJ0Ds7BpbOmXuytN3+za7ZWIqaNb++kjyjJu7tYBZqxQUz+7nyPt7BtMeBb3oAs7OLeC7yi8DDnFNAS/wMsAr7M3klcE4uwdShRoZaPvtjBfW9stdcSjE4LjpE7q5AXHNnkhPYEhIG1PU+G13pGkz9E60Xa567kUk74gyHMVQ/nc4i17ans/zTsfnlMRMC6EVJw65p+yLAAeu1yNhr7mVlLfq3cYzkDHyQSejdJ4D3TuVXGaAlnHnta0U57BgqKouGFmjRW3nkU4rAP6WsrNwZJyvLQqgw/AfDUsAZfLzpxaTFgHCtPFUdW2tGA82wzu1CN0L0yABef5gYv6FaLXRMH4UW9xQCUaQV9wG4BJR5XEeSlLmvUBCi5zEn0jYdbXXFClE+fTEr/g7dOes5D9o5mFYcJbPtqwEQ8GOdaaQcKCdyOhERMeSL9IZkDsiUm78EjA+aYOp1Zka/rQi71YAPSBCtdjahtSlqdjn3FxqLjNeShVpuyQPDCE70309BLlkER3AiEAwZqtvFnaZGYjPyqgLDxi8zbagXcFsnml9kZeSj7cwAUkYUJSSXocSioUvFJ8rrtrndVRCnBqkqKyVTJal1yF+JcAvkVboQ="
+    secure: Laj7jr96dYPFyqhyE9s3fIPUU+K+Io1vUMXzrMdy3V4h0+OwOQJTzrqPIm/ZJ/zQDqJ3JtnQ3nQjtrVQ381tscveMZfKmKr5dvOsf03PWRhIZuDe2XIE7Pb7FC4+/xzWjGmSfH+ITmxzERTZgNVdLU6//NOs1cjhYXnKRE3DnS0EJZhV1upz6qQyZyWjJNEZq7aTQnBiThB8JbRKvoJSBL/Ouy6q0UhoV2FtfUywkIEHWxY5nzh2HIkgodnniDb5XaSt2WEJx85TawXKv9AAUgP8hfBQ9IOW1evhr9PEYwM3QR4jZF5RZX2VVn+fDj8LjH8nQzSLu3CoEiq1GUHVYd5zUJjr2YT8ASonCkQ1lxbIHQUrmDl5KgTc+MJphCufU7LIUg/YujocfBSdV9Jw3OKiCnKz/5zo+o4xF46nAHNVYFGn39AXgOlksLwLAcsow4RNVEkIUeslRnT6lDsPmZKZbXQJdyFFxbJD6+Qq4OoMDewuojfyemBv1NakOrp+FQ7nCi5knbnW8gtJc0ksb7a2duxrf1faBjZCqmxHvhEsp//Ey/T0jGuiPNauhvUGNX2cRqy1vvaRaaZiruBKfEOKun31vo71FTQDanqvcc/g1LE/i71Nb1ka+ctpEIg3qxTO9khIiHPCAnVe8147MYk7YI3FIBbz+L7NBm2XUzY=
