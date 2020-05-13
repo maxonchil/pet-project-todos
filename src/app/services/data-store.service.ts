@@ -1,64 +1,56 @@
-
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { takeUntil, debounceTime } from 'rxjs/operators';
-import { Todo } from './../interfaces/todo';
-import { DataService } from './data.service';
-import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Todo} from '../interfaces/todo';
+import {DataService} from './data.service';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataStoreService implements OnDestroy {
+export class DataStoreService {
   public todos$ = new Subject<Todo[]>();
-  public todosBackup: Todo[];
-  private notifier = new Subject();
-
-
+  public todosCache: Todo[];
 
   constructor(private dataService: DataService, private snackBar: MatSnackBar) {
-    this.dataService.getTodosRequest()
-      .pipe(takeUntil(this.notifier))
-      .subscribe(({ data }) => {
-        this.todos$.next(data.todos);
-        this.todosBackup = data.todos;
-      });
+  }
+
+  private fetchAll(): any {
+    this.dataService.getTodosRequest().subscribe(({data}) => {
+      this.todosCache = data.todos;
+      this.todos$.next(data.todos);
+    });
+  }
+
+  public getTodos(): Observable<Todo[]> {
+    this.fetchAll();
+    return this.todos$.asObservable();
   }
 
   public addTodo(todo: Todo): void {
     this.dataService.addTodoRequest(todo)
-      .pipe(takeUntil(this.notifier))
-      .subscribe(({ data, message }) => {
-        this.todosBackup = [...this.todosBackup, data.todo];
-        this.todos$.next(this.todosBackup);
-        this.snackBar.open(message, 'Undo', { duration: 2000 });
+      .subscribe(({data, message}) => {
+        this.todosCache = [...this.todosCache, data.todo];
+        this.todos$.next(this.todosCache);
+        this.snackBar.open(message, 'Dismiss', {duration: 2000});
       });
   }
 
   public updateTodo(updatedTodo: Todo): void {
     this.dataService.updateTodoRequest(updatedTodo)
-      .pipe(takeUntil(this.notifier))
-      .subscribe(({ data, message }) => {
-        this.todos$.next(this.todosBackup
+      .subscribe(({data, message}) => {
+        this.todos$.next(this.todosCache
           .map((todo) => todo._id === data.todo._id ? data.todo : todo));
-        this.snackBar.open(message, 'Undo', { duration: 2000 });
+        this.snackBar.open(message, 'Dismiss', {duration: 2000});
       });
 
   }
 
   public deleteTodo(deletedTodo: Todo): void {
     this.dataService.deleteTodoRequest(deletedTodo)
-      .pipe(takeUntil(this.notifier))
-      .subscribe(({ data, message }) => {
+      .subscribe(({data, message}) => {
         this.todos$.next(data.todos);
-        this.todosBackup = data.todos;
-        this.snackBar.open(message, 'Undo', { duration: 2000 });
+        this.todosCache = data.todos;
+        this.snackBar.open(message, 'Dismiss', {duration: 2000});
       });
-  }
-
-
-  ngOnDestroy(): void {
-    this.notifier.next();
-    this.notifier.complete();
   }
 }

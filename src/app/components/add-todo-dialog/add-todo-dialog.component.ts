@@ -23,8 +23,8 @@ export class AddTodoDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoForm = this.fb.group({
-      title: ['', [Validators.minLength(2), Validators.maxLength(100), Validators.required]],
-      date: [this.minDate, [this.dateValidator, Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      date: [this.minDate, [Validators.required, this.dateValidator ]],
       time: ['', [Validators.required]],
       priority: ['', Validators.required],
     });

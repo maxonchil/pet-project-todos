@@ -1,6 +1,6 @@
 import { TodoResponse } from '../interfaces/todo-responce';
 import { environment as env } from './../../environments/environment.prod';
-import { Todo } from './../interfaces/todo';
+import { Todo } from '../interfaces/todo';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

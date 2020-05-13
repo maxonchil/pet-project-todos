@@ -1,7 +1,6 @@
 import { DataStoreService } from 'src/app/services/data-store.service';
-import { Todo } from './../../interfaces/todo';
+import { Todo } from '../../interfaces/todo';
 import { Component, OnInit, Input } from '@angular/core';
-import { TodoPriorities } from 'src/app/enums/todo-priorities.enum';
 
 @Component({
   selector: 'app-todo-item',
@@ -24,10 +23,10 @@ export class TodoItemComponent implements OnInit {
   public editTodo(todo: Todo): void {
     if (!this.editTodoID) {
       this.editTodoID = todo._id;
-      this.updatedTodo = todo._id;
       return;
     }
-    this.editTodoID = undefined;
+    // do not use undefined as manually set value
+    this.editTodoID = null;
   }
   public deleteTodo(todo: Todo): void {
     this.dataStore.deleteTodo(todo);
@@ -40,11 +39,6 @@ export class TodoItemComponent implements OnInit {
 
   public updateTodo(todo: Todo): void {
     this.dataStore.updateTodo(todo);
-    this.editTodoID = undefined;
-  }
-
-
-  public getPriority(key: string): string {
-    return TodoPriorities[key];
+    this.editTodoID = null;
   }
 }

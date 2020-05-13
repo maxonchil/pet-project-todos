@@ -1,12 +1,9 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { takeUntil } from 'rxjs/operators';
-import { DataProcessingService } from '../../services/data-processing.service';
-import { DataStoreService } from './../../services/data-store.service';
-import { AddTodoDialogComponent } from './../add-todo-dialog/add-todo-dialog.component';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { fromEvent, Subject } from 'rxjs';
-
+import {DataStoreService} from '../../services/data-store.service';
+import {AddTodoDialogComponent} from '../add-todo-dialog/add-todo-dialog.component';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {Todo} from '../../interfaces/todo';
 
 
 @Component({
@@ -14,24 +11,18 @@ import { fromEvent, Subject } from 'rxjs';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('searchInput') searchInput: ElementRef<HTMLInputElement>;
-
+export class TodoListComponent implements OnInit {
   public query: string;
-  private notifier = new Subject();
+  public todos$: Observable<Todo[]>;
+  public filterValue: string;
 
   constructor(
-    public dataStore: DataStoreService,
-    private dialog: MatDialog,
-    public dataProcessing: DataProcessingService, private snackBar: MatSnackBar) {
+    private dataStore: DataStoreService,
+    private dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    fromEvent(this.searchInput.nativeElement, 'input').pipe(takeUntil(this.notifier))
-      .subscribe(event => this.query = (event.target as HTMLInputElement).value);
+  public ngOnInit(): void {
+    this.todos$ = this.dataStore.getTodos();
   }
 
   public addTodo(): void {
@@ -42,8 +33,7 @@ export class TodoListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.query = '';
   }
 
-  ngOnDestroy() {
-    this.notifier.next();
-    this.notifier.complete();
+  public clearFilter(): void {
+    this.filterValue = null;
   }
 }

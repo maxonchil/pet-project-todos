@@ -4,7 +4,6 @@ export interface TodoResponse {
   status: string;
   message: string;
   data?: Data;
-
 }
 
 interface Data {

@@ -1,24 +1,31 @@
 <div class="todo">
   <div class="todo__controllers">
     <div class="todo__inputs">
-      <mat-form-field class="todo__form-field">
-        <mat-label>Search by word</mat-label>
-        <input
-          matInput
-          type="search"
-          #searchInput
-          class="todo__search-field"
-          placeholder="e.g: Meeting, Natalia"
-          (keydown.esc)="clearSearch()"
-        />
-      </mat-form-field>
+      <div class="todo__search">
+        <mat-form-field class="todo__form-field">
+          <mat-label>Search by word</mat-label>
+          <input
+            [(ngModel)]="query"
+            matInput
+            type="search"
+            class="todo__search-field"
+            placeholder="e.g: Meeting, Natalia"
+            (keydown.esc)="clearSearch()"
+          />
+          <mat-hint id="mat-hint" *ngIf="!(todos$| async | search: query)?.length">Not found</mat-hint>
+        </mat-form-field>
+        <button [disabled]="!query" mat-icon-button (click)="clearSearch()">
+          <mat-icon class="todo__clear-search">close</mat-icon>
+        </button>
+
+      </div>
       <div class="todo__filter">
         <mat-form-field>
           <mat-label>Filter note</mat-label>
           <mat-select
-            (selectionChange)="dataProcessing.todoFilter($event.value)"
+            [(ngModel)]="filterValue"
           >
-            <mat-option value="deadline_comming">Deadline coomming</mat-option>
+            <mat-option value="deadline_coming">Deadline coming</mat-option>
             <mat-option value="deadline_latest">Deadline latest</mat-option>
             <mat-option value="priority_high">Priority high to low</mat-option>
             <mat-option value="priority_low">Priority low to high</mat-option>
@@ -27,8 +34,8 @@
           </mat-select>
         </mat-form-field>
         <button
-          [disabled]="!dataProcessing.wasFiltred"
-          (click)="dataProcessing.clearFilter()"
+          [disabled]="!filterValue"
+          (click)="clearFilter()"
           mat-icon-button
         >
           <mat-icon>refresh</mat-icon>
@@ -41,7 +48,7 @@
   </div>
   <ul class="todo__list">
     <li
-      *ngFor="let todo of dataStore.todos$ | async | search: query"
+      *ngFor="let todo of todos$ | async | search: query | filter: filterValue"
       class="todo__item"
     >
       <app-todo-item [todo]="todo"></app-todo-item>
